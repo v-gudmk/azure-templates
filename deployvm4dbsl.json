@@ -299,7 +299,7 @@
             "vmSize": "Standard_E2s_v3",
             "disks": [
               {
-                "lun": 3,
+                "lun": 0,
                 "caching": "ReadOnly",
                 "createOption": "Empty",
                 "diskSizeGB": 500,
@@ -309,7 +309,7 @@
               }
             ],
             "scriptArguments": {
-              "Windows": "-luns \"3\" -names \"data\" -paths \"C:\\sql\\data\"  -sizes \"100\""
+              "Windows": "-luns \"0\" -names \"data\" -paths \"C:\\sql\\data\"  -sizes \"100\""
             },
             "useFastNetwork": false
           },
