@@ -77,7 +77,7 @@
         "commands": {
             "Windows": "[concat('IF EXIST c:\\sapcd rmdir /q /s c:\\sapcd & net use \\\\tesioqaccount.file.core.windows.net\\oqshare ', parameters('sharePassword'), ' /USER:', parameters('shareUsername'), ' & \\\\tesioqaccount.file.core.windows.net\\oqshare\\oq\\scripts\\install_TESI.bat -Azure ', parameters('adminPassword'), ' ', parameters('adminUsername'))]",
             "WindowsD": "[concat('IF EXIST c:\\sapcd rmdir /q /s c:\\sapcd & net use \\\\tesioqaccount.file.core.windows.net\\oqshare ', parameters('sharePassword'), ' /USER:', parameters('shareUsername'), ' & \\\\tesioqaccount.file.core.windows.net\\oqshare\\oq\\scripts\\install_TESI.bat -Azure -JoinDomain -DomainUser ', parameters('DomainUser'),' -Domain ', parameters('Domain'), ' -DomainPassword ', parameters('DomainPassword'), ' -LocalAdminPassword ', parameters('adminPassword'), ' -AdminAccount ', parameters('adminUsername'))]",
-            "Linux": "[concat('sudo mkdir -p /sapmnt/oqshare; sudo mount -t cifs -o username=', parameters('shareUsername'), ',password=', parameters('sharePassword'), ' //tesioqaccount.file.core.windows.net/oqshare /sapmnt/oqshare; sudo cp -R /sapmnt/oqshare/oq/sl_auto/packages/slha_agent_l /home/sapadmin; sudo -i /home/sapadmin/slha_agent_l/slave_installer.sh -d /home/sapadmin/TESI')]"
+            "Linux": "[concat('mkdir -p /sapmnt/oqshare; mount -t cifs -o username=', parameters('shareUsername'), ',password=', parameters('sharePassword'), ' //tesioqaccount.file.core.windows.net/oqshare /sapmnt/oqshare; cp -R /sapmnt/oqshare/oq/sl_auto/packages/slha_agent_l /home/sapadmin; /home/sapadmin/slha_agent_l/slave_installer.sh -d /home/sapadmin/TESI')]"
         }
 
     },
