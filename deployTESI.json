@@ -1,0 +1,104 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "vmName": {
+            "type": "string"
+        },
+        "cseExtPublisher": {
+            "type": "string"
+        },
+        "cseExtType": {
+            "type": "string"
+        },
+        "cseExtName": {
+            "type": "string"
+        },
+        "cseExtVersion": {
+            "type": "string"
+        },
+        "location": {
+            "type": "string"
+        },
+        "customData": {
+            "type": "string"
+        },
+        "osType": {
+            "type": "string",
+            "allowedValues": [
+                "Linux",
+                "Windows",
+                "WindowsD"
+            ],
+            "defaultValue": "Windows"
+        },
+        "adminUsername": {
+          "type": "string",
+          "defaultValue": "",
+          "metadata": {
+            "description": "Username for the Virtual Machine."
+          }
+        },
+        "adminPassword": {
+          "type": "securestring",
+          "defaultValue": "",
+          "metadata": {
+            "description": "Password for the Virtual Machine."
+          }
+        },
+        "shareUsername": {
+          "type": "securestring",
+          "defaultValue": "",
+          "metadata": {
+            "description": "Username to mount share."
+          }
+        },
+        "sharePassword": {
+          "type": "securestring",
+          "defaultValue": "",
+          "metadata": {
+            "description": "Password to mount share."
+          }
+        },
+        "Domain": {
+          "type": "string",
+          "defaultValue": "nt6.msp.corp"
+        },
+        "DomainUser": {
+          "type": "string",
+          "defaultValue": "nt6\\sapadm"
+        },
+        "DomainPassword": {
+          "type": "string",
+          "defaultValue": "Walldorf2022!"
+        }
+    },
+    "variables": {
+        "commands": {
+            "Windows": "[concat('IF EXIST c:\\sapcd rmdir /q /s c:\\sapcd & net use \\\\tesioqaccount.file.core.windows.net\\oqshare ', parameters('sharePassword'), ' /USER:', parameters('shareUsername'), ' & \\\\tesioqaccount.file.core.windows.net\\oqshare\\oq\\scripts\\install_TESI.bat -Azure ', parameters('adminPassword'), ' ', parameters('adminUsername'))]",
+            "WindowsD": "[concat('IF EXIST c:\\sapcd rmdir /q /s c:\\sapcd & net use \\\\tesioqaccount.file.core.windows.net\\oqshare ', parameters('sharePassword'), ' /USER:', parameters('shareUsername'), ' & \\\\tesioqaccount.file.core.windows.net\\oqshare\\oq\\scripts\\install_TESI.bat -Azure -JoinDomain -DomainUser ', parameters('DomainUser'),' -Domain ', parameters('Domain'), ' -DomainPassword ', parameters('DomainPassword'), ' -LocalAdminPassword ', parameters('adminPassword'), ' -AdminAccount ', parameters('adminUsername'))]",
+            "Linux": "[concat('sudo mkdir -p /sapmnt/oqshare; sudo mount -t cifs -o username=', parameters('shareUsername'), ',password=', parameters('sharePassword'), ' //tesioqaccount.file.core.windows.net/oqshare /sapmnt/oqshare; sudo cp -R /sapmnt/oqshare/oq/sl_auto/packages/slha_agent_l /home/sapadmin; sudo -i /home/sapadmin/slha_agent_l/slave_installer.sh -d /home/sapadmin/TESI')]"
+        }
+
+    },
+    "resources": [
+        {
+            "type": "Microsoft.Compute/virtualMachines/extensions",
+            "name": "[concat(parameters('vmName'), '/', parameters('cseExtName'))]",
+            "apiVersion": "2015-06-15",
+            "location": "[parameters('location')]",
+            "properties": {
+                "publisher": "[parameters('cseExtPublisher')]",
+                "type": "[parameters('cseExtType')]",
+                "typeHandlerVersion": "[parameters('cseExtVersion')]",
+                "autoUpgradeMinorVersion": true,
+                "settings": {
+                    
+                },
+                "protectedSettings": {
+                    "commandToExecute": "[variables('commands')[parameters('osType')]]"
+                }
+            }
+        }
+    ]
+}
