@@ -197,12 +197,12 @@ else
   log "count not equal"
 fi
 
-log "TESI agent"
-log "Mount OQ share"
-sudo mkdir -p /sapmnt/oqshare
-sudo mount -t cifs -o username=tesioqaccount,password=W2BOEUe/gyKQCjfkw5lxt0gLeD43lV9spNZ+CSH7gAjocG39q8Pk1YQPh0EaV56RACV1Zrb4aYHa0ADCv9W3tQ== //tesioqaccount.file.core.windows.net/oqshare /sapmnt/oqshare;
-
 # Testing without installing the agent here
+#log "TESI agent"
+#log "Mount OQ share"
+#sudo mkdir -p /sapmnt/oqshare
+#sudo mount -t cifs -o username=tesioqaccount,password=W2BOEUe/gyKQCjfkw5lxt0gLeD43lV9spNZ+CSH7gAjocG39q8Pk1YQPh0EaV56RACV1Zrb4aYHa0ADCv9W3tQ== //tesioqaccount.file.core.windows.net/oqshare /sapmnt/oqshare;
+
 #log "Copy TESI agent"
 #sudo cp -R /sapmnt/oqshare/oq/sl_auto/packages/slha_agent_l /home/sapadmin
 #sudo find /home/sapadmin/slha_agent_l -name \*.sh -exec sed -i -e 's/\r$//' {} \;
