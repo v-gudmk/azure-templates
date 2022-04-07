@@ -310,7 +310,7 @@
             ],
             "scriptArguments": {
               "Windows": "-luns \"0\" -names \"data\" -paths \"C:\\sql\\data\"  -sizes \"100\""
-              "Linux": "-luns '0' -names 'data' -paths '/sql/data' -sizes '100'
+              "Linux": "-luns '0' -names 'data' -paths '/sql/data' -sizes '100'"
             },
             "useFastNetwork": false
           },
