@@ -91,7 +91,7 @@
                 "publisher": "[parameters('cseExtPublisher')]",
                 "type": "[parameters('cseExtType')]",
                 "typeHandlerVersion": "[parameters('cseExtVersion')]",
-                "autoUpgradeMinorVersion": false,
+                "autoUpgradeMinorVersion": true,
                 "settings": {
                     
                 },
