@@ -403,7 +403,7 @@
               }
             ],
             "scriptArguments": {
-              "Linux": "-luns '0,1,2#3#4#5' -names 'datalog#shared#usrsap#backup' -paths '/hana/data,/hana/log,/sql#/hana/shared#/usr/sap#/hana/backup' -sizes '70,100#100#100#100'"
+              "Linux": "-luns '0,1,2#3#4#5' -names 'datalog#shared#usrsap#backup' -paths '/hana/data,/hana/log,/sql#/hana/shared#/usr/sap#/hana/backup' -sizes '70,100,100#100#100#100'"
             },
             "useFastNetwork": true
           },
