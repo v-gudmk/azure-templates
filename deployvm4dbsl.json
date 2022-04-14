@@ -21,6 +21,7 @@
           "Windows Server 2022 Datacenter",
           "Windows Server 2022 Azure",
           "SLES 12",
+          "SLES 15",
           "RHEL 7",
           "Oracle Linux 7"
         ],
@@ -179,6 +180,12 @@
         "SLES 12": {
           "sku": "12-SP3",
           "offer": "SLES-SAP",
+          "publisher": "SUSE",
+          "OSType": "Linux"
+        },
+        "SLES 15": {
+          "sku": "gen2",
+          "offer": "sles-sap-15-sp3",
           "publisher": "SUSE",
           "OSType": "Linux"
         },
