@@ -417,9 +417,18 @@
                     "storageAccountType": "StandardSSD_LRS"
                 }
               }
+              {
+                "lun": 7,
+                "caching": "ReadOnly",
+                "createOption": "Empty",
+                "diskSizeGB": 512,
+                "managedDisk": {
+                    "storageAccountType": "StandardSSD_LRS"
+                }
+              }
             ],
             "scriptArguments": {
-              "Linux": "-luns '0,1,2,3#4#5#6' -names 'datalog#shared#usrsap#backup' -paths '/hana/data,/hana/log,/sql#/hana/shared#/usr/sap#/hana/backup' -sizes '100,100,100#100#100#100'"
+              "Linux": "-luns '0,1#2,3#4#5#6,7' -names 'data#log#shared#usrsap#backup' -paths '/hana/data#/hana/log#/hana/shared#/usr/sap#/sql' -sizes '100,100,100#100#100#100'"
             },
             "useFastNetwork": true
           },
