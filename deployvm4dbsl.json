@@ -1149,7 +1149,7 @@
               "caching": "ReadWrite",
               "createOption": "FromImage",
               "managedDisk": {
-                "storageAccountType": "Premium_LRS"
+                "storageAccountType": "StandardSSD_LRS"
               }
             },
             "dataDisks": "[variables('sizes')[parameters('sapSystemSize')][parameters('dbType')].disks]"
