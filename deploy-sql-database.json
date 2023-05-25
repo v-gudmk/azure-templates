@@ -42,10 +42,13 @@
         "description": "The administrator password of the SQL logical server."
       }
     },
-      "collation": {
-        "type": "String",
-        "value": "SQL_Latin1_General_CP850_BIN2"
+    "collation": {
+      "type": "String",
+      "defaultvalue": "SQL_Latin1_General_CP850_BIN2"
+      "metadata": {
+        "description": "Collation name."
       }
+    }
   },
   "resources": [
     {
