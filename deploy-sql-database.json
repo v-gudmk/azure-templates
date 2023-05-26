@@ -43,7 +43,7 @@
       }
     },
     "collation": {
-      "type": "String",
+      "type": "string",
       "defaultvalue": "SQL_Latin1_General_CP850_BIN2",
       "metadata": {
         "description": "Collation name."
