@@ -70,9 +70,26 @@
         "name": "Standard",
         "tier": "Standard"
       },
+      properties: {
+        "catalogCollation": "[parameters('collation')]",
+        "collation": "[parameters('collation')]"
+      },
       "dependsOn": [
         "[resourceId('Microsoft.Sql/servers', parameters('serverName'))]"
       ]
+    },
+    {
+      "type": "Microsoft.Sql/servers/privateEndpointConnections",
+      "name": "[parameters('serverName')]",
+      "parent": "[parameters('serverName')]",
+      properties: {
+        "privateEndpoint": {
+          id: "[parameters('serverName')]"
+      },
+      "privateLinkServiceConnectionState": {
+        "description": 'Endpoint connection state'
+        "status": 'Approved'
+      }
     }
   ]
 }
