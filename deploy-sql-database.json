@@ -80,6 +80,7 @@
     },
     {
       "type": "Microsoft.Sql/servers/privateEndpointConnections",
+      "apiVersion": "2022-05-01-preview",
       "name": "[parameters('serverName')]",
       "parent": "[parameters('serverName')]",
       "properties": {
