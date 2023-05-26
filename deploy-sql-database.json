@@ -84,19 +84,6 @@
       "dependsOn": [
         "[resourceId('Microsoft.Sql/servers', parameters('serverName'))]"
       ]
-    },
-    {
-      "type": "Microsoft.Sql/servers/privateEndpointConnections",
-      "apiVersion": "2022-05-01-preview",
-      "name": "[format('{0}/{1}', parameters('serverName'), parameters('endpointName'))]",
-      "parent": "[parameters('serverName')]",
-      "properties": {
-        "privateEndpoint": {
-          "id": "[parameters('endpointName')]",
-          "description": "Endpoint connection state",
-          "status": "Approved"
-        }
-      }
     }
   ]
 }
