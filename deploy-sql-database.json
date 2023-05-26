@@ -70,7 +70,7 @@
         "name": "Standard",
         "tier": "Standard"
       },
-      properties: {
+      "properties": {
         "catalogCollation": "[parameters('collation')]",
         "collation": "[parameters('collation')]"
       },
@@ -82,7 +82,7 @@
       "type": "Microsoft.Sql/servers/privateEndpointConnections",
       "name": "[parameters('serverName')]",
       "parent": "[parameters('serverName')]",
-      properties: {
+      "properties": {
         "privateEndpoint": {
           id: "[parameters('serverName')]"
       },
