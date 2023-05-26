@@ -23,6 +23,13 @@
         "description": "The name of the SQL Database."
       }
     },
+    "endpointName": {
+      "type": "string",
+      "defaultValue": "DBEndpoint",
+      "metadata": {
+        "description": "The name network endpoint."
+      }
+    },
     "location": {
       "type": "string",
       "defaultValue": "[resourceGroup().location]",
@@ -81,11 +88,11 @@
     {
       "type": "Microsoft.Sql/servers/privateEndpointConnections",
       "apiVersion": "2022-05-01-preview",
-      "name": "[parameters('serverName')]",
+      "name": "[format('{0}/{1}', parameters('serverName'), parameters('endpointName'))]",
       "parent": "[parameters('serverName')]",
       "properties": {
         "privateEndpoint": {
-          "id": "[parameters('serverName')]",
+          "id": "[parameters('endpointName')]",
           "description": "Endpoint connection state",
           "status": "Approved"
         }
