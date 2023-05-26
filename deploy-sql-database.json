@@ -84,10 +84,8 @@
       "parent": "[parameters('serverName')]",
       "properties": {
         "privateEndpoint": {
-        "id": "[parameters('serverName')]"
-      },
-      "privateLinkServiceConnectionState": {
-        "description": 'Endpoint connection state'
+        "id": "[parameters('serverName')"": {
+        "description": "Endpoint connection state",
         "status": 'Approved'
       }
     }
