@@ -86,7 +86,7 @@
         "privateEndpoint": {
           "id": "[parameters('serverName')]",
           "description": "Endpoint connection state",
-          "status": 'Approved'
+          "status": "Approved"
       }
     }
   ]
