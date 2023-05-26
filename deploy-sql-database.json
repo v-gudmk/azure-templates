@@ -89,7 +89,10 @@
           "description": "Endpoint connection state",
           "status": "Approved"
         }
-      }
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.Sql/servers', parameters('serverName'))]"
+      ]
     }
   ]
 }
