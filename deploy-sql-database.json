@@ -77,6 +77,10 @@
         "name": "Standard",
         "tier": "Standard"
       },
+      "properties": {
+        "catalogCollation": "SQL_Latin1_General_CP850_BIN2",
+        "collation": "SQL_Latin1_General_CP850_BIN2"
+      },
       "dependsOn": [
         "[resourceId('Microsoft.Sql/servers', parameters('serverName'))]"
       ]
