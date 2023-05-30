@@ -65,7 +65,8 @@
       "location": "[parameters('location')]",
       "properties": {
         "administratorLogin": "[parameters('administratorLogin')]",
-        "administratorLoginPassword": "[parameters('administratorLoginPassword')]"
+        "administratorLoginPassword": "[parameters('administratorLoginPassword')]",
+        "catalogCollation": "SQL_Latin1_General_CP850_BIN2",
       }
     },
     {
@@ -79,7 +80,10 @@
       },
       "dependsOn": [
         "[resourceId('Microsoft.Sql/servers', parameters('serverName'))]"
-      ]
+      ],
+      "properties": {
+        "collation": "SQL_Latin1_General_CP850_BIN2"
+      }
     }
   ]
 }
