@@ -83,7 +83,7 @@
       "properties": {
         "catalogCollation": "SQL_Latin1_General_CP850_BIN2",
         "collation": "SQL_Latin1_General_CP850_BIN2"
-      },
+      }
     }
   ]
 }
