@@ -65,8 +65,7 @@
       "location": "[parameters('location')]",
       "properties": {
         "administratorLogin": "[parameters('administratorLogin')]",
-        "administratorLoginPassword": "[parameters('administratorLoginPassword')]",
-        "catalogCollation": "[parameters('collation')]"
+        "administratorLoginPassword": "[parameters('administratorLoginPassword')]"
       }
     },
     {
