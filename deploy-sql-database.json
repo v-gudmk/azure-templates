@@ -60,7 +60,7 @@
   "resources": [
     {
       "type": "Microsoft.Sql/servers",
-      "apiVersion": "2022-05-01-preview",
+      "apiVersion": "2022-05-01",
       "name": "[parameters('serverName')]",
       "location": "[parameters('location')]",
       "properties": {
@@ -70,7 +70,7 @@
     },
     {
       "type": "Microsoft.Sql/servers/databases",
-      "apiVersion": "2022-05-01-preview",
+      "apiVersion": "2022-05-01",
       "name": "[format('{0}/{1}', parameters('serverName'), parameters('sqlDBName'))]",
       "location": "[parameters('location')]",
       "sku": {
@@ -83,6 +83,33 @@
       "properties": {
         "collation": "[parameters('collation')]"
       }
+    },
+    {
+      "type": "Microsoft.Network/privateEndpoints",
+      "apiVersion": "2022-05-01",
+      "name": "[variables('privateEndpointName')]",
+      "location": "[parameters('location')]",
+      "properties": {
+        "subnet": {
+          "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', variables('vnetName'), variables('subnet1Name'))]"
+        },
+        "privateLinkServiceConnections": [
+          {
+            "name": "[variables('privateEndpointName')]",
+            "properties": {
+              "privateLinkServiceId": "[resourceId('Microsoft.Sql/servers', variables('serverName'))]",
+              "groupIds": [
+                "sqlServer"
+              ]
+            }
+          }
+        ]
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.Sql/servers', variables('serverName'))]",
+        "[resourceId('Microsoft.Network/virtualNetworks/subnets', variables('vnetName'), variables('subnet1Name'))]",
+        "[resourceId('Microsoft.Network/virtualNetworks', variables('vnetName'))]"
+      ]
     }
   ]
 }
