@@ -73,7 +73,7 @@
     },
     "variables": {
         "vnetName": "[concat(parameters('serverName'), '-vnet')]",
-        "subnetName": "Subnet",
+        "subnetName": "Subnet"
     },
     "resources": [
         {
