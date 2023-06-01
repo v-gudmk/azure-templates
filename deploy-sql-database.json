@@ -124,7 +124,7 @@
                         "name": "[parameters('privateEndpointName')]",
                         "properties": {
                             "privateLinkServiceId": "[resourceId('Microsoft.Sql/servers', parameters('serverName'))]",
-                            "groupIds": [variables('subnetName')
+                            "groupIds": [
                                 "sqlServer"
                             ]
                         }
