@@ -55,7 +55,7 @@
       "metadata": {
         "description": "Collation name."
       },
-    "vnetName": {
+    "virtualNetworkName": {
       "type": "string",
       "metadata": {
         "description": "VNET name."
@@ -101,7 +101,7 @@
       "location": "[parameters('location')]",
       "properties": {
         "subnet": {
-          "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('vnetName'), parameters('subnetName'))]"
+          "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworkName'), parameters('subnetName'))]"
         },
         "privateLinkServiceConnections": [
           {
@@ -117,8 +117,8 @@
       },
       "dependsOn": [
         "[resourceId('Microsoft.Sql/servers', parameters('serverName'))]",
-        "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('vnetName'), parameters('subnetName'))]",
-        "[resourceId('Microsoft.Network/virtualNetworks', parameters('vnetName'))]"
+        "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworkName'), parameters('subnetName'))]",
+        "[resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworkName'))]"
       ]
     }
   ]
