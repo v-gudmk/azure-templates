@@ -56,20 +56,20 @@
                 "description": "Collation name."
             }
         },
-      "subnetId": {
-        "type": "string",
-        "defaultValue": "",
-        "metadata": {
-          "description": "The id of the subnet you want to use."
+        "subnetId": {
+            "type": "string",
+            "defaultValue": "",
+            "metadata": {
+                "description": "The id of the subnet you want to use."
+            }
+        },
+        "vnetId": {
+            "type": "string",
+            "defaultValue": "",
+            "metadata": {
+                "description": "The id of the vnet you want to use."
+            }
         }
-      },
-      "vnetId": {
-        "type": "string",
-        "defaultValue": "",
-        "metadata": {
-          "description": "The id of the vnet you want to use."
-        }
-      }
     },
     "variables": {
         "vnetName": "[concat(parameters('serverName'), '-vnet')]",
