@@ -73,7 +73,8 @@
     },
     "variables": {
         "vnetName": "[concat(parameters('serverName'), '-vnet')]",
-        "subnetName": "Subnet"
+        "subnetName": "Subnet",
+    "subnet1Prefix": "10.0.0.0/24"
     },
     "resources": [
         {
@@ -123,6 +124,18 @@
                     }
                 ]
             }
+        },
+        {
+          "type": "Microsoft.Network/virtualNetworks/subnets",
+          "apiVersion": "2021-05-01",
+          "name": "[format('{0}/{1}', variables('vnetName'), variables('subnetName'))]",
+          "properties": {
+            "addressPrefix": "[variables('subnet1Prefix')]",
+            "privateEndpointNetworkPolicies": "Disabled"
+          },
+          "dependsOn": [
+            "[resourceId('Microsoft.Network/virtualNetworks', variables('vnetName'))]"
+          ]
         },
         {
             "type": "Microsoft.Network/privateEndpoints",
