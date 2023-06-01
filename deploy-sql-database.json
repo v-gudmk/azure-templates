@@ -55,19 +55,11 @@
             "metadata": {
                 "description": "Collation name."
             }
-        },
-        "virtualNetworkName": {
-            "type": "string",
-            "metadata": {
-                "description": "VNET name."
-            }
-        },
-        "subnetName": {
-            "type": "string",
-            "metadata": {
-                "description": "Subnet name."
-            }
         }
+    },
+    "variables": {
+      "vnetName": "[concat(parameters('serverName'), '-vnet')]",
+      "subnetName": "Subnet",
     },
     "resources": [
         {
@@ -96,6 +88,28 @@
                 "collation": "[parameters('collation')]"
             }
         },
+      {
+        "type": "Microsoft.Network/virtualNetworks",
+        "name": "[variables('vnetName')]",
+        "apiVersion": "2018-10-01",
+        "location": "[parameters('location')]",
+        "condition": "[equals(length(parameters('subnetId')), 0)]",
+        "properties": {
+          "addressSpace": {
+            "addressPrefixes": [
+              "10.0.0.0/16"
+            ]
+          },
+          "subnets": [
+            {
+              "name": "[variables('subnetName')]",
+              "properties": {
+                "addressPrefix": "10.0.0.0/24"
+              }
+            }
+          ]
+        }
+      },
         {
             "type": "Microsoft.Network/privateEndpoints",
             "apiVersion": "2022-05-01",
@@ -103,14 +117,14 @@
             "location": "[parameters('location')]",
             "properties": {
                 "subnet": {
-                    "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworkName'), parameters('subnetName'))]"
+                    "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', variables('vnetName'), variables('subnetName'))]"
                 },
                 "privateLinkServiceConnections": [
                     {
                         "name": "[parameters('privateEndpointName')]",
                         "properties": {
                             "privateLinkServiceId": "[resourceId('Microsoft.Sql/servers', parameters('serverName'))]",
-                            "groupIds": [
+                            "groupIds": [variables('subnetName')
                                 "sqlServer"
                             ]
                         }
@@ -119,8 +133,8 @@
             },
             "dependsOn": [
                 "[resourceId('Microsoft.Sql/servers', parameters('serverName'))]",
-                "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworkName'), parameters('subnetName'))]",
-                "[resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworkName'))]"
+                "[resourceId('Microsoft.Network/virtualNetworks/subnets', variables('vnetName'), variables('subnetName'))]",
+                "[resourceId('Microsoft.Network/virtualNetworks', variables('vnetName'))]"
             ]
         }
     ]
