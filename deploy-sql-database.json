@@ -23,11 +23,11 @@
         "description": "The name of the SQL Database."
       }
     },
-    "endpointName": {
+    "privateEndpointName": {
       "type": "string",
       "defaultValue": "DBEndpoint",
       "metadata": {
-        "description": "The name network endpoint."
+        "description": "The name of the private network endpoint."
       }
     },
     "location": {
@@ -54,6 +54,16 @@
       "defaultvalue": "SQL_Latin1_General_CP850_BIN2",
       "metadata": {
         "description": "Collation name."
+      },
+    "vnetName": {
+      "type": "string",
+      "metadata": {
+        "description": "VNET name."
+      },
+    "subnetName": {
+      "type": "string",
+      "metadata": {
+        "description": "Subnet name."
       }
     }
   },
@@ -87,17 +97,17 @@
     {
       "type": "Microsoft.Network/privateEndpoints",
       "apiVersion": "2022-05-01",
-      "name": "[variables('privateEndpointName')]",
+      "name": "[parameters('privateEndpointName')]",
       "location": "[parameters('location')]",
       "properties": {
         "subnet": {
-          "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', variables('vnetName'), variables('subnet1Name'))]"
+          "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('vnetName'), parameters('subnetName'))]"
         },
         "privateLinkServiceConnections": [
           {
-            "name": "[variables('privateEndpointName')]",
+            "name": "[parameters('privateEndpointName')]",
             "properties": {
-              "privateLinkServiceId": "[resourceId('Microsoft.Sql/servers', variables('serverName'))]",
+              "privateLinkServiceId": "[resourceId('Microsoft.Sql/servers', parameters('serverName'))]",
               "groupIds": [
                 "sqlServer"
               ]
@@ -106,9 +116,9 @@
         ]
       },
       "dependsOn": [
-        "[resourceId('Microsoft.Sql/servers', variables('serverName'))]",
-        "[resourceId('Microsoft.Network/virtualNetworks/subnets', variables('vnetName'), variables('subnet1Name'))]",
-        "[resourceId('Microsoft.Network/virtualNetworks', variables('vnetName'))]"
+        "[resourceId('Microsoft.Sql/servers', parameters('serverName'))]",
+        "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('vnetName'), parameters('subnetName'))]",
+        "[resourceId('Microsoft.Network/virtualNetworks', parameters('vnetName'))]"
       ]
     }
   ]
