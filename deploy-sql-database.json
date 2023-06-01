@@ -58,8 +58,8 @@
         }
     },
     "variables": {
-      "vnetName": "[concat(parameters('serverName'), '-vnet')]",
-      "subnetName": "Subnet",
+        "vnetName": "[concat(parameters('serverName'), '-vnet')]",
+        "subnetName": "Subnet",
     },
     "resources": [
         {
@@ -88,28 +88,28 @@
                 "collation": "[parameters('collation')]"
             }
         },
-      {
-        "type": "Microsoft.Network/virtualNetworks",
-        "name": "[variables('vnetName')]",
-        "apiVersion": "2018-10-01",
-        "location": "[parameters('location')]",
-        "condition": "[equals(length(parameters('subnetId')), 0)]",
-        "properties": {
-          "addressSpace": {
-            "addressPrefixes": [
-              "10.0.0.0/16"
-            ]
-          },
-          "subnets": [
-            {
-              "name": "[variables('subnetName')]",
-              "properties": {
-                "addressPrefix": "10.0.0.0/24"
-              }
+        {
+            "type": "Microsoft.Network/virtualNetworks",
+            "name": "[variables('vnetName')]",
+            "apiVersion": "2018-10-01",
+            "location": "[parameters('location')]",
+            "condition": "[equals(length(parameters('subnetId')), 0)]",
+            "properties": {
+                "addressSpace": {
+                    "addressPrefixes": [
+                        "10.0.0.0/16"
+                    ]
+                },
+                "subnets": [
+                    {
+                        "name": "[variables('subnetName')]",
+                        "properties": {
+                            "addressPrefix": "10.0.0.0/24"
+                        }
+                    }
+                ]
             }
-          ]
-        }
-      },
+        },
         {
             "type": "Microsoft.Network/privateEndpoints",
             "apiVersion": "2022-05-01",
