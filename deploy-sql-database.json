@@ -71,11 +71,6 @@
             }
         }
     },
-    "variables": {
-        "vnetName": "vnetgw-beachhead-TIMSFT",
-        "subnetName": "NT5OQ_Subnet",
-        "subnetPrefix": "10.0.0.0/24"
-    },
     "resources": [
         {
             "type": "Microsoft.Sql/servers",
@@ -102,67 +97,6 @@
             "properties": {
                 "collation": "[parameters('collation')]"
             }
-        },
-        {
-            "type": "Microsoft.Network/virtualNetworks",
-            "name": "[variables('vnetName')]",
-            "apiVersion": "2018-10-01",
-            "location": "[parameters('location')]",
-            "condition": "[equals(length(parameters('subnetId')), 0)]",
-            "properties": {
-                "addressSpace": {
-                    "addressPrefixes": [
-                        "10.0.0.0/16"
-                    ]
-                },
-                "subnets": [
-                    {
-                        "name": "[variables('subnetName')]",
-                        "properties": {
-                            "addressPrefix": "10.0.0.0/24"
-                        }
-                    }
-                ]
-            }
-        },
-        {
-            "type": "Microsoft.Network/virtualNetworks/subnets",
-            "apiVersion": "2017-06-01",
-            "name": "[format('{0}/{1}', variables('vnetName'), variables('subnetName'))]",
-            "properties": {
-                "addressPrefix": "[variables('subnetPrefix')]",
-                "privateEndpointNetworkPolicies": "Disabled"
-            },
-            "dependsOn": [
-                "[resourceId('Microsoft.Network/virtualNetworks', variables('vnetName'))]"
-            ]
-        },
-        {
-            "type": "Microsoft.Network/privateEndpoints",
-            "apiVersion": "2019-04-01",
-            "name": "[parameters('privateEndpointName')]",
-            "location": "[parameters('location')]",
-            "properties": {
-                "subnet": {
-                    "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', variables('vnetName'), variables('subnetName'))]"
-                },
-                "privateLinkServiceConnections": [
-                    {
-                        "name": "[parameters('privateEndpointName')]",
-                        "properties": {
-                            "privateLinkServiceId": "[resourceId('Microsoft.Sql/servers', parameters('serverName'))]",
-                            "groupIds": [
-                                "sqlServer"
-                            ]
-                        }
-                    }
-                ]
-            },
-            "dependsOn": [
-                "[resourceId('Microsoft.Sql/servers', parameters('serverName'))]",
-                "[resourceId('Microsoft.Network/virtualNetworks/subnets', variables('vnetName'), variables('subnetName'))]",
-                "[resourceId('Microsoft.Network/virtualNetworks', variables('vnetName'))]"
-            ]
         }
     ]
 }
