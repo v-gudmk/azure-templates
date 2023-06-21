@@ -72,8 +72,8 @@
         }
     },
     "variables": {
-        "networkSecurityGroupName": "[format('SQLMI-{0}-NSG', parameters('managedInstanceName'))]",
-        "routeTableName": "[format('SQLMI-{0}-Route-Table', parameters('managedInstanceName'))]"
+        "networkSecurityGroupName": "[format('SQLMI-{0}-NSG', parameters('serverName'))]",
+        "routeTableName": "[format('SQLMI-{0}-Route-Table', parameters('serverName'))]"
     },
     "resources": [
            {
@@ -100,7 +100,7 @@
                     {
                         "name": "allow_redirect_inbound",
                         "properties": {
-                            "description": "Allow inbound redirect traffic to Managed Instance inside the virtual network",
+                            "description": "Allow inbound redirect traffic to SQL Instance inside the virtual network",
                             "protocol": "Tcp",
                             "sourcePortRange": "*",
                             "destinationPortRange": "11000-11999",
