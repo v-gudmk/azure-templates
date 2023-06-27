@@ -153,8 +153,11 @@
         },
         {
             "type": "Microsoft.Sql/servers",
-            "apiVersion": "2014-04-01",
+            "apiVersion": "2022-05-01-preview",
             "name": "[parameters('serverName')]",
+            "identity": {
+                "type": "SystemAssigned"
+            },
             "location": "[parameters('location')]",
             "properties": {
                 "administratorLogin": "[parameters('administratorLogin')]",
