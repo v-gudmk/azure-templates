@@ -161,8 +161,7 @@
             "location": "[parameters('location')]",
             "properties": {
                 "administratorLogin": "[parameters('administratorLogin')]",
-                "administratorLoginPassword": "[parameters('administratorLoginPassword')]",
-                "subnetId": "[parameters('subnetId')]"
+                "administratorLoginPassword": "[parameters('administratorLoginPassword')]"
             }
         },
         {
