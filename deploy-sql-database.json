@@ -58,9 +58,9 @@
         },
         "subnetId": {
             "type": "string",
-            "defaultValue": "",
+            "defaultValue": "/subscriptions/2e3da591-1da8-437b-8c2e-81565bd2cfa4/resourceGroups/rg-beachhead-TIMSFT/providers/Microsoft.Network/virtualNetworks/vnetgw-beachhead-TIMSFT/subnets/NT5OQ_Subnet",
             "metadata": {
-                "description": "The id of the subnet you want to use."
+                "description": "Enter subnet ID."
             }
         },
         "vnetId": {
